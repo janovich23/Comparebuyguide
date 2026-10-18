@@ -3,6 +3,166 @@
   "updated": "2026-10-18",
   "items": [
     {
+      "id": "19",
+      "name": "MacBook Pro laptops",
+      "category": "Tech",
+      "query": "MacBook Pro laptop",
+      "note": "Match chip generation, memory and storage; check battery condition and warranty.",
+      "url": "https://www.ebay.com/sch/i.html?_nkw=MacBook%20Pro%20laptop&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-19"
+    },
+    {
+      "id": "20",
+      "name": "Gaming laptops",
+      "category": "Tech",
+      "query": "gaming laptop",
+      "note": "Compare the exact GPU, processor, screen and included power supply.",
+      "url": "https://www.ebay.com/sch/i.html?_nkw=gaming%20laptop&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-20"
+    },
+    {
+      "id": "21",
+      "name": "OLED televisions",
+      "category": "Tech",
+      "query": "OLED television",
+      "note": "Check screen condition, shipping protection, return terms and local pickup requirements.",
+      "url": "https://www.ebay.com/sch/i.html?_nkw=OLED%20television&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-21"
+    },
+    {
+      "id": "22",
+      "name": "Mirrorless cameras",
+      "category": "Tech",
+      "query": "mirrorless camera",
+      "note": "Confirm sensor condition, shutter count where available, and whether a lens is included.",
+      "url": "https://www.ebay.com/sch/i.html?_nkw=mirrorless%20camera&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-22"
+    },
+    {
+      "id": "23",
+      "name": "Camera lenses",
+      "category": "Tech",
+      "query": "camera lens",
+      "note": "Match the lens mount and camera format; inspect condition and seller photos.",
+      "url": "https://www.ebay.com/sch/i.html?_nkw=camera%20lens&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-23"
+    },
+    {
+      "id": "24",
+      "name": "Robot vacuum and mop systems",
+      "category": "Home",
+      "query": "robot vacuum mop self empty",
+      "note": "Check the exact model, docking station, replacement supplies and warranty.",
+      "url": "https://www.ebay.com/sch/i.html?_nkw=robot%20vacuum%20mop%20self%20empty&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-24"
+    },
+    {
+      "id": "25",
+      "name": "Espresso machines",
+      "category": "Home",
+      "query": "espresso machine",
+      "note": "Check dimensions, voltage, maintenance history and included accessories.",
+      "url": "https://www.ebay.com/sch/i.html?_nkw=espresso%20machine&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-25"
+    },
+    {
+      "id": "26",
+      "name": "Patio furniture sets",
+      "category": "Home",
+      "query": "patio furniture set",
+      "note": "Confirm set contents, dimensions, assembly and freight or pickup costs.",
+      "url": "https://www.ebay.com/sch/i.html?_nkw=patio%20furniture%20set&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-26"
+    },
+    {
+      "id": "27",
+      "name": "Cordless power tool kits",
+      "category": "Tools",
+      "query": "cordless power tool combo kit",
+      "note": "Match the battery platform and verify batteries, charger and tool list.",
+      "url": "https://www.ebay.com/sch/i.html?_nkw=cordless%20power%20tool%20combo%20kit&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-27"
+    },
+    {
+      "id": "28",
+      "name": "Rolling tool cabinets",
+      "category": "Tools",
+      "query": "rolling tool cabinet",
+      "note": "Check dimensions, drawer capacity, delivery terms and local pickup details.",
+      "url": "https://www.ebay.com/sch/i.html?_nkw=rolling%20tool%20cabinet&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-28"
+    },
+    {
+      "id": "29",
+      "name": "Treadmills",
+      "category": "Fitness",
+      "query": "treadmill",
+      "note": "Check assembled dimensions, user limits, delivery, assembly and service availability.",
+      "url": "https://www.ebay.com/sch/i.html?_nkw=treadmill&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-29"
+    },
+    {
+      "id": "30",
+      "name": "Home gym machines",
+      "category": "Fitness",
+      "query": "home gym machine",
+      "note": "Confirm space requirements, included attachments, weight limits and delivery terms.",
+      "url": "https://www.ebay.com/sch/i.html?_nkw=home%20gym%20machine&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-30"
+    },
+    {
+      "id": "11",
+      "name": "Apple AirPods 4",
+      "category": "Tech",
+      "query": "Apple AirPods 4",
+      "note": "Confirm whether the listing includes ANC and its condition.",
+      "url": "https://www.ebay.com/sch/i.html?_nkw=Apple%20AirPods%204&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-11"
+    },
+    {
+      "id": "12",
+      "name": "Beats Studio3",
+      "category": "Tech",
+      "query": "Beats Studio3 headphones",
+      "note": "Compare included accessories, condition and return policy.",
+      "url": "https://www.ebay.com/sch/i.html?_nkw=Beats%20Studio3%20headphones&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-12"
+    },
+    {
+      "id": "13",
+      "name": "Lenovo Yoga laptops",
+      "category": "Tech",
+      "query": "Lenovo Yoga laptop",
+      "note": "Match memory, storage, processor and screen to your needs.",
+      "url": "https://www.ebay.com/sch/i.html?_nkw=Lenovo%20Yoga%20laptop&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-13"
+    },
+    {
+      "id": "14",
+      "name": "Portable jump starters",
+      "category": "Auto",
+      "query": "portable car jump starter",
+      "note": "Confirm engine and electrical-system compatibility.",
+      "url": "https://www.ebay.com/sch/i.html?_nkw=portable%20car%20jump%20starter&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-14"
+    },
+    {
+      "id": "15",
+      "name": "Car phone mounts",
+      "category": "Auto",
+      "query": "car phone mount",
+      "note": "Check your phone size, case and mounting location.",
+      "url": "https://www.ebay.com/sch/i.html?_nkw=car%20phone%20mount&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-15"
+    },
+    {
+      "id": "16",
+      "name": "Air fryers",
+      "category": "Home",
+      "query": "air fryer",
+      "note": "Compare basket space, dimensions and cleaning instructions.",
+      "url": "https://www.ebay.com/sch/i.html?_nkw=air%20fryer&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-16"
+    },
+    {
+      "id": "17",
+      "name": "Coffee makers",
+      "category": "Home",
+      "query": "coffee maker",
+      "note": "Check capacity, dimensions and included accessories.",
+      "url": "https://www.ebay.com/sch/i.html?_nkw=coffee%20maker&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-17"
+    },
+    {
+      "id": "18",
+      "name": "Adjustable dumbbells",
+      "category": "Fitness",
+      "query": "adjustable dumbbells pair",
+      "note": "Check whether the listing includes one dumbbell or a pair.",
+      "url": "https://www.ebay.com/sch/i.html?_nkw=adjustable%20dumbbells%20pair&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-18"
+    },
+    {
       "id": "01",
       "name": "Nike Air Max 90",
       "category": "Shoes",
@@ -81,70 +241,6 @@
       "query": "Nike Air Max 90 Terrascape",
       "note": "Check the exact version, color and condition.",
       "url": "https://www.ebay.com/sch/i.html?_nkw=Nike%20Air%20Max%2090%20Terrascape&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-10"
-    },
-    {
-      "id": "11",
-      "name": "Apple AirPods 4",
-      "category": "Tech",
-      "query": "Apple AirPods 4",
-      "note": "Confirm whether the listing includes ANC and its condition.",
-      "url": "https://www.ebay.com/sch/i.html?_nkw=Apple%20AirPods%204&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-11"
-    },
-    {
-      "id": "12",
-      "name": "Beats Studio3",
-      "category": "Tech",
-      "query": "Beats Studio3 headphones",
-      "note": "Compare included accessories, condition and return policy.",
-      "url": "https://www.ebay.com/sch/i.html?_nkw=Beats%20Studio3%20headphones&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-12"
-    },
-    {
-      "id": "13",
-      "name": "Lenovo Yoga laptops",
-      "category": "Tech",
-      "query": "Lenovo Yoga laptop",
-      "note": "Match memory, storage, processor and screen to your needs.",
-      "url": "https://www.ebay.com/sch/i.html?_nkw=Lenovo%20Yoga%20laptop&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-13"
-    },
-    {
-      "id": "14",
-      "name": "Portable jump starters",
-      "category": "Auto",
-      "query": "portable car jump starter",
-      "note": "Confirm engine and electrical-system compatibility.",
-      "url": "https://www.ebay.com/sch/i.html?_nkw=portable%20car%20jump%20starter&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-14"
-    },
-    {
-      "id": "15",
-      "name": "Car phone mounts",
-      "category": "Auto",
-      "query": "car phone mount",
-      "note": "Check your phone size, case and mounting location.",
-      "url": "https://www.ebay.com/sch/i.html?_nkw=car%20phone%20mount&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-15"
-    },
-    {
-      "id": "16",
-      "name": "Air fryers",
-      "category": "Home",
-      "query": "air fryer",
-      "note": "Compare basket space, dimensions and cleaning instructions.",
-      "url": "https://www.ebay.com/sch/i.html?_nkw=air%20fryer&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-16"
-    },
-    {
-      "id": "17",
-      "name": "Coffee makers",
-      "category": "Home",
-      "query": "coffee maker",
-      "note": "Check capacity, dimensions and included accessories.",
-      "url": "https://www.ebay.com/sch/i.html?_nkw=coffee%20maker&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-17"
-    },
-    {
-      "id": "18",
-      "name": "Adjustable dumbbells",
-      "category": "Fitness",
-      "query": "adjustable dumbbells pair",
-      "note": "Check whether the listing includes one dumbbell or a pair.",
-      "url": "https://www.ebay.com/sch/i.html?_nkw=adjustable%20dumbbells%20pair&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&campid=5339225508&toolid=10001&customid=cbg-18"
     }
   ]
 }
