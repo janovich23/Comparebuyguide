@@ -13,4 +13,69 @@
 <article class="card" data-category="Laptops"><a class="listing-photo" href="https://www.ebay.com/itm/298291638949?mkevt=1&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;campid=5339225508&amp;toolid=10001&amp;customid=cbg-item-298291638949" target="_blank" rel="sponsored noopener" aria-label="View Apple MacBook Air 15-inch M4 · 24GB / 512GB on eBay"><img src="https://i.ebayimg.com/images/g/wwYAAeSw~gJqiJdc/s-l500.webp" alt="Apple MacBook Air 15-inch M4 · 24GB / 512GB — photo from this eBay listing" loading="lazy" width="500" height="360"></a><div class="card-body"><p class="label">Laptops</p><h2>Apple MacBook Air 15-inch M4 · 24GB / 512GB</h2><p class="seller">Seller: Supplytronics<br><strong>Excellent - Refurbished</strong></p><p class="price">$1,352.95<small>USD · asking price when checked</small></p><p class="detail">Choose the available color on eBay and confirm the selected configuration.</p><a class="buy" href="https://www.ebay.com/itm/298291638949?mkevt=1&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;campid=5339225508&amp;toolid=10001&amp;customid=cbg-item-298291638949" target="_blank" rel="sponsored noopener">View this listing on eBay ↗</a><p class="fine">Item #298291638949 · checked Oct 17, 2026</p></div></article></div></section>
 <section class="buying-note" aria-labelledby="compare-heading"><h2 id="compare-heading">Same model. Two seller offers.</h2><p>Milwaukee M18 2696-26 6-tool kit — listing terms checked October 17, 2026. Confirm the included tools and accessories match before comparing totals.</p><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;text-align:left;min-width:480px"><caption style="text-align:left;padding:16px 0">Asking prices and seller terms at the time checked</caption><thead><tr><th>Listing detail</th><th>48Group</th><th>Zoro Tools</th></tr></thead><tbody><tr><th>Condition</th><td>New</td><td>New</td></tr><tr><th>Item price</th><td>$695.00</td><td>$829.99</td></tr><tr><th>Listed shipping*</th><td>$24.95</td><td>Free</td></tr><tr><th>Returns</th><td>30 days; buyer pays return shipping</td><td>60 days; seller pays return shipping</td></tr><tr><th>View offer</th><td><a href="https://www.ebay.com/itm/178513476850?mkevt=1&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;campid=5339225508&amp;toolid=10001&amp;customid=cbg-item-178513476850" target="_blank" rel="sponsored noopener">48Group listing ↗</a></td><td><a href="https://www.ebay.com/itm/226031533082?mkevt=1&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;campid=5339225508&amp;toolid=10001&amp;customid=cbg-item-226031533082" target="_blank" rel="sponsored noopener">Zoro Tools listing ↗</a></td></tr></tbody></table></div><p>*Shipping can depend on delivery location. Tax and other charges are determined at checkout. Both links are affiliate links.</p></section><aside class="buying-note"><h2>Check the listing before you buy.</h2><p>Each photo above comes from the specific eBay listing linked on that card; it may be the seller’s stock photo rather than a photo of the individual unit. We have not inspected, authenticated or tested these items. This is a manually checked selection, not an automatically synchronized inventory feed. Items can sell out, end or change price after the date shown. Check the selected variant, seller photos, condition notes, shipping or pickup requirements, returns and final total on eBay.</p></aside></main>
 <footer><strong>Compare Buy Guide</strong><p><a href="index.html">Home</a> · <a href="about.html">About</a> · <a href="editorial.html">Editorial approach</a> · <a href="privacy.html">Privacy</a> · <a href="disclosure.html">Affiliate disclosure</a></p><p>© 2026 Compare Buy Guide</p></footer>
-<script>const filters=document.querySelectorAll('[data-filter]');const cards=document.querySelectorAll('[data-category]');filters.forEach(button=>button.addEventListener('click',()=>{const category=button.dataset.filter;filters.forEach(item=>item.setAttribute('aria-pressed',String(item===button)));let count=0;cards.forEach(card=>{card.hidden=category!=='All'&&card.dataset.category!==category;if(!card.hidden)count++;});document.getElementById('count').textContent=count+' eBay listing'+(count===1?'':'s');}));</script></body></html>
+<script>const filters=document.querySelectorAll('[data-filter]');const cards=document.querySelectorAll('[data-category]');filters.forEach(button=>button.addEventListener('click',()=>{const category=button.dataset.filter;filters.forEach(item=>item.setAttribute('aria-pressed',String(item===button)));let count=0;cards.forEach(card=>{card.hidden=category!=='All'&&card.dataset.category!==category;if(!card.hidden)count++;});document.getElementById('count').textContent=count+' eBay listing'+(count===1?'':'s');}));</script>
+<script>
+/* Keep manually checked cards visible if the API feed is unavailable. */
+(async function loadFreshListings(){
+  const grid=document.querySelector('.grid');
+  const count=document.getElementById('count');
+  const intro=document.querySelector('.intro');
+  if(!grid||!count)return;
+  try{
+    const response=await fetch('products.json',{cache:'no-store'});
+    if(!response.ok) return;
+    const feed=await response.json();
+    if(!Array.isArray(feed.items)||!feed.items.length)return;
+    const categories=new Set(['Laptops','Cameras','Tools','Home']);
+    const fragment=document.createDocumentFragment();
+    let valid=0;
+    for(const item of feed.items){
+      if(!categories.has(item.category))continue;
+      const url=new URL(item.url);
+      if(url.protocol!=='https:'||!(url.hostname==='ebay.com'||url.hostname.endsWith('.ebay.com')))continue;
+      const imageUrl=new URL(item.image);
+      if(imageUrl.protocol!=='https:')continue;
+      const card=document.createElement('article');
+      card.className='card';card.dataset.category=item.category;
+      const picture=document.createElement('a');
+      picture.className='listing-photo';picture.href=url.href;
+      picture.target='_blank';picture.rel='sponsored noopener';
+      const img=document.createElement('img');
+      img.src=imageUrl.href;img.alt=String(item.title||'eBay listing');
+      img.loading='lazy';img.width=500;img.height=360;
+      picture.appendChild(img);card.appendChild(picture);
+      const body=document.createElement('div');body.className='card-body';
+      function part(tag,cls,value){const node=document.createElement(tag);node.className=cls;node.textContent=String(value);body.appendChild(node);return node;}
+      part('p','label',item.category);
+      part('h2','',item.title||'eBay listing');
+      part('p','seller','Seller: '+(item.seller||'See listing')+' · '+(item.condition||'See listing'));
+      const amount=Number(item.price?.value);
+      if(!Number.isFinite(amount))continue;
+      part('p','price',new Intl.NumberFormat('en-US',{style:'currency',currency:item.price.currency||'USD'}).format(amount));
+      part('p','detail','Check current price, shipping, condition and availability on eBay.');
+      const link=part('a','buy','View this listing on eBay ↗');
+      link.href=url.href;link.target='_blank';link.rel='sponsored noopener';
+      part('p','fine','Listing details last refreshed '+new Date(feed.updatedAt).toLocaleDateString('en-US'));
+      card.appendChild(body);fragment.appendChild(card);valid++;
+    }
+    if(!valid)return;
+    grid.replaceChildren(fragment);
+    const updateCount=()=>{
+      const selected=document.querySelector('[data-filter][aria-pressed="true"]')?.dataset.filter||'All';
+      let shown=0;
+      grid.querySelectorAll('[data-category]').forEach(card=>{
+        card.hidden=selected!=='All'&&card.dataset.category!==selected;
+        if(!card.hidden)shown++;
+      });
+      count.textContent=shown+' eBay listing'+(shown===1?'':'s');
+    };
+    document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',updateCount));
+    updateCount();
+    if(intro)intro.textContent='Explore eBay listings with real listing photos and seller details. The product feed is refreshed regularly when eBay API access is available; prices and availability may change.';
+    document.querySelectorAll('.buying-note').forEach(section=>{
+      if(section.textContent.includes('Same model. Two seller offers.')||section.textContent.includes('manually checked selection'))section.hidden=true;
+    });
+  }catch(error){console.warn('Showing manually checked listings because live feed is unavailable.');}
+})();
+</script>
+</body></html>
