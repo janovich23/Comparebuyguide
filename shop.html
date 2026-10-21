@@ -78,4 +78,71 @@
   }catch(error){console.warn('Showing manually checked listings because live feed is unavailable.');}
 })();
 </script>
-</body></html>
+<style>
+#comparison-tools{margin:12px 0 26px;padding:18px;background:#eaf5ed;border:1px solid #c8e0d0;border-radius:14px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+#comparison-tools label{font-weight:700}#comparison-tools select{padding:11px;border:1px solid #9dbda7;border-radius:8px;background:white;max-width:100%}
+.compare-pick{display:flex;gap:9px;align-items:center;margin:8px 0 0;font-size:14px;font-weight:700}
+#compare-panel{margin:18px 0 32px;padding:18px;border:2px solid #137648;border-radius:14px;background:white}
+#compare-panel[hidden]{display:none}#compare-panel table{width:100%;border-collapse:collapse;min-width:470px}#compare-panel td,#compare-panel th{text-align:left;border-bottom:1px solid #dce7df;padding:12px;vertical-align:top;overflow-wrap:anywhere}
+#compare-panel img{width:110px;height:95px;object-fit:contain}#compare-panel a{font-weight:700}#compare-panel .scroll{overflow-x:auto}
+</style>
+<script>
+(function(){
+const grid=document.querySelector('.grid');if(!grid)return;
+const toolbar=document.querySelector('.toolbar');if(!toolbar)return;
+const controls=document.createElement('section');controls.id='comparison-tools';controls.setAttribute('aria-label','Sort and compare products');
+controls.innerHTML='<label for="sort-products">Sort listings:</label><select id="sort-products"><option value="default">Original order</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="name">Name: A to Z</option></select><span id="compare-count" aria-live="polite">Select 2–4 products to compare</span><button type="button" id="compare-now" disabled>Compare selected</button><button type="button" id="compare-clear">Clear</button>';
+toolbar.after(controls);
+const panel=document.createElement('section');panel.id='compare-panel';panel.hidden=true;panel.setAttribute('aria-label','Side-by-side product comparison');controls.after(panel);
+const selected=new Map();let currentGrid=null;
+function decorate(){
+const cards=[...grid.querySelectorAll('.card')];
+for(const card of cards){
+if(card.querySelector('.compare-pick'))continue;
+const title=card.querySelector('h2')?.textContent?.trim()||'Product';
+const priceText=card.querySelector('.price')?.textContent||'';
+const price=Number((priceText.match(/\$\s*([\d,]+(?:\.\d+)?)/)||[])[1]?.replace(/,/g,''));
+const link=card.querySelector('a.buy')||card.querySelector('a[href*="ebay.com"]');
+const url=link?.href||'';
+const photo=card.querySelector('.listing-photo img')?.src||'';
+const seller=card.querySelector('.seller')?.textContent?.trim()||'See listing for seller and condition';
+if(!url||!Number.isFinite(price))continue;
+const key=url;
+const label=document.createElement('label');label.className='compare-pick';
+const checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.checked=selected.has(key);checkbox.setAttribute('aria-label','Compare '+title);
+checkbox.addEventListener('change',()=>{
+if(checkbox.checked){if(selected.size>=4){checkbox.checked=false;alert('Compare up to 4 products at a time.');return;}selected.set(key,{title,price,url,photo,seller});}
+else selected.delete(key);update();
+});
+label.append(checkbox,document.createTextNode(' Add to comparison'));
+(card.querySelector('.card-body')||card).append(label);
+}
+}
+function update(){
+const n=selected.size;document.getElementById('compare-count').textContent=n+' selected (choose 2–4)';
+document.getElementById('compare-now').disabled=n<2;
+grid.querySelectorAll('.card').forEach(card=>{const link=card.querySelector('a.buy');const check=card.querySelector('.compare-pick input');if(link&&check)check.checked=selected.has(link.href);});
+}
+function sortCards(){
+const mode=document.getElementById('sort-products').value;
+const cards=[...grid.querySelectorAll('.card')];if(mode==='default'){cards.sort((a,b)=>Number(a.dataset.originalOrder)-Number(b.dataset.originalOrder));}
+else cards.sort((a,b)=>{if(mode==='name')return (a.querySelector('h2')?.textContent||'').localeCompare(b.querySelector('h2')?.textContent||'');const p=card=>Number((card.querySelector('.price')?.textContent.match(/\$\s*([\d,]+(?:\.\d+)?)/)||[])[1]?.replace(/,/g,''));return mode==='low'?p(a)-p(b):p(b)-p(a);});
+grid.append(...cards);
+}
+function sync(){if(grid.firstElementChild!==currentGrid){currentGrid=grid.firstElementChild;[...grid.querySelectorAll('.card')].forEach((c,i)=>{if(!c.dataset.originalOrder)c.dataset.originalOrder=i;});decorate();sortCards();update();}}
+const observer=new MutationObserver(()=>{if(!grid.querySelector('.card:not(:has(.compare-pick))'))return;observer.disconnect();sync();observer.observe(grid,{childList:true});});
+observer.observe(grid,{childList:true});
+document.getElementById('sort-products').addEventListener('change',sortCards);
+document.getElementById('compare-clear').addEventListener('click',()=>{selected.clear();panel.hidden=true;update();});
+document.getElementById('compare-now').addEventListener('click',()=>{
+if(selected.size<2)return;panel.replaceChildren();
+const h=document.createElement('h2');h.textContent='Compare selected products';panel.append(h);
+const note=document.createElement('p');note.textContent='Prices are listing prices, not guaranteed final totals. Check shipping, tax, specifications, returns and availability on eBay before purchasing.';panel.append(note);
+const scroll=document.createElement('div');scroll.className='scroll';const table=document.createElement('table');
+const items=[...selected.values()];const rows=[['Detail',...items.map(x=>x.title)],['Photo',...items.map(x=>x.photo)],['Listed price',...items.map(x=>'+x.price.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}))],['Seller / condition',...items.map(x=>x.seller)],['View offer',...items.map(x=>x.url)]];
+for(let i=0;i<rows.length;i++){const tr=document.createElement('tr');for(let j=0;j<rows[i].length;j++){const cell=document.createElement(i===0?'th':'td');const value=rows[i][j];if(i===1&&j>0){const img=document.createElement('img');img.src=value;img.alt=items[j-1].title;img.loading='lazy';cell.append(img);}else if(i===4&&j>0){const a=document.createElement('a');a.href=value;a.target='_blank';a.rel='sponsored noopener';a.textContent='View on eBay ↗';cell.append(a);}else cell.textContent=value;tr.append(cell);}table.append(tr);}
+scroll.append(table);panel.append(scroll);panel.hidden=false;panel.scrollIntoView({behavior:'smooth',block:'start'});
+});
+sync();
+})();
+</script></body></html>
