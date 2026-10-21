@@ -16,10 +16,26 @@ from datetime import datetime, timezone
 API = "https://api.ebay.com"
 CAMPAIGN_ID = "5339225508"
 QUERIES = {
-    "Laptops": ["laptop", "macbook pro", "gaming laptop"],
-    "Cameras": ["mirrorless camera", "sony camera"],
-    "Tools": ["milwaukee m18", "dewalt cordless tools"],
-    "Home": ["robot vacuum", "espresso machine", "portable power station"],
+    "Laptops": [
+        "laptop", "macbook pro", "gaming laptop", "lenovo thinkpad",
+        "dell xps laptop", "hp spectre laptop", "asus zenbook",
+        "microsoft surface laptop", "chromebook",
+    ],
+    "Cameras": [
+        "mirrorless camera", "sony camera", "canon eos camera",
+        "nikon z camera", "fujifilm x camera", "gopro camera",
+        "dji action camera", "camera lens",
+    ],
+    "Tools": [
+        "milwaukee m18", "dewalt cordless tools", "makita cordless tools",
+        "bosch power tools", "cordless impact wrench", "tool combo kit",
+        "laser level", "table saw", "pressure washer",
+    ],
+    "Home": [
+        "robot vacuum", "espresso machine", "portable power station",
+        "air purifier", "stand mixer", "air fryer", "cordless vacuum",
+        "dehumidifier", "home security camera", "electric lawn mower",
+    ],
 }
 LIMIT_PER_QUERY = 50
 
