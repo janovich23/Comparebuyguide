@@ -197,4 +197,23 @@ document.getElementById('sort-products')?.addEventListener('change',()=>{page=1;
 new MutationObserver(()=>{if(grid.querySelectorAll('.card').length!==lastCount){page=1;schedule();}}).observe(grid,{childList:true});
 refresh();
 })();
+</script><script>
+/* Final catalog view guard: maintain a balanced first page after async feed and sorting. */
+(function(){
+const grid=document.querySelector('.grid');if(!grid)return;
+let scheduled=false,previousSignature='';
+function balance(){
+ const cards=[...grid.querySelectorAll('.card')];if(cards.length<8)return;
+ const buckets=new Map();for(const card of cards){const k=card.dataset.category||'Other';if(!buckets.has(k))buckets.set(k,[]);buckets.get(k).push(card);}
+ if(buckets.size<2)return;
+ const signature=cards.length+'|'+[...buckets].map(([k,v])=>k+':'+v.length).join('|');
+ if(signature===previousSignature)return;previousSignature=signature;
+ const names=[...buckets.keys()];const reordered=[];let remaining=true;
+ while(remaining){remaining=false;for(const name of names){const item=buckets.get(name).shift();if(item){reordered.push(item);remaining=true;}}}
+ if(reordered.every((card,i)=>card===cards[i]))return;
+ observer.disconnect();grid.append(...reordered);observer.observe(grid,{childList:true});
+}
+const observer=new MutationObserver(()=>{if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{scheduled=false;balance();});});
+observer.observe(grid,{childList:true});balance();
+})();
 </script></body></html>
