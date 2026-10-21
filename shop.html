@@ -158,7 +158,65 @@ if(selected.size<2)return;panel.replaceChildren();
 const h=document.createElement('h2');h.textContent='Compare selected products';panel.append(h);
 const note=document.createElement('p');note.textContent='Prices are listing prices, not guaranteed final totals. Check shipping, tax, specifications, returns and availability on eBay before purchasing.';panel.append(note);
 const scroll=document.createElement('div');scroll.className='scroll';const table=document.createElement('table');
-const items=[...selected.values()];const rows=[['Detail',...items.map(x=>x.title)],['Photo',...items.map(x=>x.photo)],['Listed price',...items.map(x=>'+x.price.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}))],['Seller / condition',...items.map(x=>x.seller)],['View offer',...items.map(x=>x.url)]];
+const items=[...selected.values()];const rows=[['Detail',...items.map(x=>x.title)],['Photo',...items.map(x=>x.photo)],['Listed price',...items.map(x=>'],['Seller / condition',...items.map(x=>x.seller)],['View offer',...items.map(x=>x.url)]];
+for(let i=0;i<rows.length;i++){const tr=document.createElement('tr');for(let j=0;j<rows[i].length;j++){const cell=document.createElement(i===0?'th':'td');const value=rows[i][j];if(i===1&&j>0){const img=document.createElement('img');img.src=value;img.alt=items[j-1].title;img.loading='lazy';cell.append(img);}else if(i===4&&j>0){const a=document.createElement('a');a.href=value;a.target='_blank';a.rel='sponsored noopener';a.textContent='View on eBay ↗';cell.append(a);}else cell.textContent=value;tr.append(cell);}table.append(tr);}
+scroll.append(table);panel.append(scroll);panel.hidden=false;panel.scrollIntoView({behavior:'smooth',block:'start'});
+});
+sync();
+})();
+</script><style>
+#catalog-search{padding:11px 13px;border:1px solid #9dbda7;border-radius:8px;min-width:220px;max-width:100%;flex:1}
+#catalog-pages{display:flex;align-items:center;justify-content:center;gap:14px;padding:24px 0;flex-wrap:wrap}
+#catalog-pages button{padding:10px 16px}#catalog-pages button:disabled{opacity:.45}
+</style>
+<script>
+(function(){
+const grid=document.querySelector('.grid'),controls=document.getElementById('comparison-tools');if(!grid||!controls)return;
+const search=document.createElement('input');search.id='catalog-search';search.type='search';search.placeholder='Search products, brands, sellers…';search.setAttribute('aria-label','Search product listings');controls.prepend(search);
+const pages=document.createElement('nav');pages.id='catalog-pages';pages.setAttribute('aria-label','Product pages');
+const prev=document.createElement('button'),next=document.createElement('button'),status=document.createElement('span');
+prev.type=next.type='button';prev.textContent='← Previous';next.textContent='Next →';status.setAttribute('aria-live','polite');pages.append(prev,status,next);grid.after(pages);
+let page=1;const perPage=48;let scheduled=false;let lastCount=0;
+function refresh(){
+const cards=[...grid.querySelectorAll('.card')],category=document.querySelector('[data-filter][aria-pressed="true"]')?.dataset.filter||'All',query=search.value.toLowerCase().trim();
+const matching=cards.filter(card=>(category==='All'||card.dataset.category===category)&&(!query||(card.querySelector('h2')?.textContent+' '+card.querySelector('.seller')?.textContent).toLowerCase().includes(query)));
+const max=Math.max(1,Math.ceil(matching.length/perPage));page=Math.min(page,max);
+const visible=new Set(matching.slice((page-1)*perPage,page*perPage));
+for(const card of cards)card.hidden=!visible.has(card);
+status.textContent='Page '+page+' of '+max+' · '+matching.length.toLocaleString()+' matches';
+prev.disabled=page<=1;next.disabled=page>=max;pages.hidden=matching.length<=perPage;
+const count=document.getElementById('count');if(count)count.textContent=matching.length.toLocaleString()+' matching eBay listings';
+lastCount=cards.length;
+}
+function schedule(){if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{scheduled=false;refresh();});}
+search.addEventListener('input',()=>{page=1;schedule();});
+prev.addEventListener('click',()=>{page--;refresh();controls.scrollIntoView({behavior:'smooth'});});
+next.addEventListener('click',()=>{page++;refresh();controls.scrollIntoView({behavior:'smooth'});});
+document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{page=1;schedule();}));
+document.getElementById('sort-products')?.addEventListener('change',()=>{page=1;schedule();});
+new MutationObserver(()=>{if(grid.querySelectorAll('.card').length!==lastCount){page=1;schedule();}}).observe(grid,{childList:true});
+refresh();
+})();
+</script><script>
+/* Final catalog view guard: maintain a balanced first page after async feed and sorting. */
+(function(){
+const grid=document.querySelector('.grid');if(!grid)return;
+let scheduled=false,previousSignature='';
+function balance(){
+ const cards=[...grid.querySelectorAll('.card')];if(cards.length<8)return;
+ const buckets=new Map();for(const card of cards){const k=card.dataset.category||'Other';if(!buckets.has(k))buckets.set(k,[]);buckets.get(k).push(card);}
+ if(buckets.size<2)return;
+ const signature=cards.length+'|'+[...buckets].map(([k,v])=>k+':'+v.length).join('|');
+ if(signature===previousSignature)return;previousSignature=signature;
+ const names=[...buckets.keys()];const reordered=[];let remaining=true;
+ while(remaining){remaining=false;for(const name of names){const item=buckets.get(name).shift();if(item){reordered.push(item);remaining=true;}}}
+ if(reordered.every((card,i)=>card===cards[i]))return;
+ observer.disconnect();grid.append(...reordered);observer.observe(grid,{childList:true});
+}
+const observer=new MutationObserver(()=>{if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{scheduled=false;balance();});});
+observer.observe(grid,{childList:true});balance();
+})();
+</script></body></html>+x.price.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}))],['Seller / condition',...items.map(x=>x.seller)],['View offer',...items.map(x=>x.url)]];
 for(let i=0;i<rows.length;i++){const tr=document.createElement('tr');for(let j=0;j<rows[i].length;j++){const cell=document.createElement(i===0?'th':'td');const value=rows[i][j];if(i===1&&j>0){const img=document.createElement('img');img.src=value;img.alt=items[j-1].title;img.loading='lazy';cell.append(img);}else if(i===4&&j>0){const a=document.createElement('a');a.href=value;a.target='_blank';a.rel='sponsored noopener';a.textContent='View on eBay ↗';cell.append(a);}else cell.textContent=value;tr.append(cell);}table.append(tr);}
 scroll.append(table);panel.append(scroll);panel.hidden=false;panel.scrollIntoView({behavior:'smooth',block:'start'});
 });
