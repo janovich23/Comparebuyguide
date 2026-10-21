@@ -35,7 +35,20 @@
     const categories=new Set(['Laptops','Cameras','Tools','Home']);
     const fragment=document.createDocumentFragment();
     let valid=0;
-    for(const item of feed.items){
+    // Interleave departments so page one shows a balanced mix, not a wall of laptops.
+    const departments=['Laptops','Cameras','Tools','Home'];
+    const buckets=new Map(departments.map(name=>[name,[]]));
+    for(const item of feed.items){if(buckets.has(item.category))buckets.get(item.category).push(item);}
+    const mixed=[];
+    let more=true;
+    while(more){
+      more=false;
+      for(const name of departments){
+        const next=buckets.get(name).shift();
+        if(next){mixed.push(next);more=true;}
+      }
+    }
+    for(const item of mixed){
       if(!categories.has(item.category))continue;
       const url=new URL(item.url);
       if(url.protocol!=='https:'||!(url.hostname==='ebay.com'||url.hostname.endsWith('.ebay.com')))continue;
