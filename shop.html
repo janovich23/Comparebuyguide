@@ -101,7 +101,7 @@
     document.querySelectorAll('.buying-note').forEach(section=>{
       if(section.textContent.includes('Same model. Two seller offers.')||section.textContent.includes('manually checked selection'))section.hidden=true;
     });
-  }catch(error){console.warn('Showing manually checked listings because live feed is unavailable.');}
+  }catch(error){console.warn('Current eBay feed unavailable; hiding stale prices.',error);unavailable();}
 })();
 </script>
 <style>
