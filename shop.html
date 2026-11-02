@@ -33,7 +33,7 @@
     const feed=await response.json();
     if(!Array.isArray(feed.items)||!feed.items.length){unavailable();return;}
     const refreshedAt=Date.parse(feed.updatedAt);
-    if(!Number.isFinite(refreshedAt)||Date.now()-refreshedAt>36*60*60*1000||refreshedAt>Date.now()+10*60*1000){unavailable();return;}
+    if(!Number.isFinite(refreshedAt)||Date.now()-refreshedAt>18*60*60*1000||refreshedAt>Date.now()+10*60*1000){unavailable();return;}
     const categories=new Set(['Laptops','Cameras','Tools','Home']);
     const fragment=document.createDocumentFragment();
     let valid=0;
