@@ -3,7 +3,7 @@ name: Refresh eBay affiliate listings
 on:
   workflow_dispatch:
   schedule:
-    - cron: '17 9 * * *'
+    - cron: '17 */6 * * *'
 
 permissions:
   contents: write
