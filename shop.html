@@ -33,7 +33,7 @@
     const feed=await response.json();
     if(!Array.isArray(feed.items)||!feed.items.length){unavailable();return;}
     const refreshedAt=Date.parse(feed.updatedAt);
-    if(!Number.isFinite(refreshedAt)||Date.now()-refreshedAt>18*60*60*1000||refreshedAt>Date.now()+10*60*1000){unavailable();return;}
+    const feedIsFresh=Number.isFinite(refreshedAt)&&Date.now()-refreshedAt<=18*60*60*1000&&refreshedAt<=Date.now()+10*60*1000;
     const categories=new Set(['Laptops','Cameras','Tools','Home']);
     const fragment=document.createDocumentFragment();
     let valid=0;
@@ -72,7 +72,7 @@
       part('p','seller','Seller: '+(item.seller||'See listing')+' · '+(item.condition||'See listing'));
       const amount=Number(item.price?.value);
       if(!Number.isFinite(amount))continue;
-      part('p','price',new Intl.NumberFormat('en-US',{style:'currency',currency:item.price.currency||'USD'}).format(amount));
+      if(feedIsFresh){part('p','price',new Intl.NumberFormat('en-US',{style:'currency',currency:item.price.currency||'USD'}).format(amount));}else{part('p','price','Check current price on eBay');}
       part('p','detail','Check current price, shipping, condition and availability on eBay.');
       const link=part('a','buy','View this listing on eBay ↗');
       link.href=url.href;link.target='_blank';link.rel='sponsored noopener';
@@ -88,7 +88,7 @@
         card.hidden=selected!=='All'&&card.dataset.category!==selected;
         if(!card.hidden)shown++;
       });
-      count.textContent=shown+' eBay listing'+(shown===1?'':'s');
+      count.textContent=shown+' eBay listing'+(shown===1?'':'s')+(feedIsFresh?'':' · Older feed: verify availability and prices on eBay');
     };
     document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',updateCount));
     updateCount();
